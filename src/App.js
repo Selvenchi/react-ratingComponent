@@ -15,20 +15,23 @@ function Rating() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!selected) return;
+
     setSubmit((cur) => !submit);
   }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-black">
+    <div className="flex flex-col items-center justify-center bg-black min-h-screen">
       {!submit ? (
-        <div className="flex flex-col items-start gap-4 w-[26rem] bg-gradient-to-b from-blue to-dark p-10 rounded-2xl">
+        <div className="flex flex-col items-start text-sm sm:text-[16px] w-[21rem] sm:w-[26rem] gap-2 sm:gap-4 bg-gradient-to-b from-blue to-dark px-6 py-8 rounded-2xl">
           <img
             src="/images/icon-star.svg"
             className="bg-blue rounded-full p-4"
             alt="Icon"
           />
           <h1 className="text-white text-3xl">How did we do?</h1>
-          <p className="text-grey opacity-60">
+          <p className="text-grey opacity-80">
             Please let us know how we did with your support request. All
             feedback is appreciated to help us improve our offering!
           </p>
@@ -45,13 +48,13 @@ function Rating() {
           </button>
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-4 w-[26rem] bg-gradient-to-b from-blue to-dark p-10 rounded-2xl">
+        <div className="flex flex-col items-center gap-4 w-[20rem] sm:w-[26rem] bg-gradient-to-b from-blue to-dark px-6 py-10 rounded-2xl">
           <img src="/images/illustration-thank-you.svg" alt="Illust" />
           <p className="text-primary bg-blue opacity-80 px-5 py-2 rounded-full m-3">
             You selected {selected} out of 5
           </p>
           <h1 className="text-white text-3xl">Thank you!</h1>
-          <p className="text-grey text-center opacity-60">
+          <p className="text-grey text-center opacity-80 text-sm sm:text-[16px]">
             We appreciate you taking the time to give a rating. If you ever need
             more support, don’t hesitate to get in touch!
           </p>
@@ -63,16 +66,16 @@ function Rating() {
 
 function ButtonList({ ratings, selected, handleClick }) {
   return (
-    <div className="flex gap-4 mt-2">
+    <div className="flex gap-4 sm:gap-5 mt-2">
       {ratings.map((rating, i) => (
         <button
           key={i}
           onClick={() => handleClick(rating)}
-          className={`text-grey bg-blue rounded-full p-[1.7rem] w-12 h-12 flex items-center justify-center ${
-            selected !== rating
-              ? `hover:bg-white hover:text-blue hover:transition-colors`
-              : ``
-          } ${selected === rating ? `bg-primary text-blue` : ``}`}
+          className={`bg-blue rounded-full p-[0.5rem] w-11 h-11 sm:w-12 sm:h-12 sm:p-[1.7rem] flex items-center justify-center ${
+            selected === rating
+              ? `bg-primary text-blue`
+              : `text-grey hover:bg-white hover:text-blue hover:transition-colors`
+          }`}
         >
           {rating}
         </button>
